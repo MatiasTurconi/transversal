@@ -124,7 +124,7 @@ public class AlumnoData {
                     alumnos.put(rs.getInt("idAlumno"), new Alumno(rs.getInt("idAlumno"),rs.getInt("dni"),rs.getString("apellido"),rs.getString("nombre"),rs.getDate("fechaNacimiento").toLocalDate(),rs.getBoolean("estado")));
                 }
             }else{
-                System.out.println("Alumno no encontrado");
+                System.out.println("No se encontraron alumnos dados de alta");
             }
         } catch (SQLException ex) {
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
