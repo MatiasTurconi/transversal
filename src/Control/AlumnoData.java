@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -81,5 +83,52 @@ public class AlumnoData {
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
         }
         return alum;
+    }
+    
+    public void bajaAlumno(int id,boolean baja){
+        String sql="UPDATE alumno SET estado=? WHERE idAlumno=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setBoolean(1, baja);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
+        }
+    }
+    
+    public void altaAlumno(int id,boolean alta){
+        String sql="UPDATE alumno SET estado=? WHERE idAlumno=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setBoolean(1, alta);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
+        }
+    }
+    
+    public Map<Integer, Alumno> alumnosAlta(boolean estado){
+        Map<Integer,Alumno> alumnos=null;
+        String sql="SELECT * FROM alumno WHERE estado=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setBoolean(1, estado);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                alumnos=new HashMap();
+                while(rs.next()){
+                    alumnos.put(rs.getInt("idAlumno"), new Alumno(rs.getInt("idAlumno"),rs.getInt("dni"),rs.getString("apellido"),rs.getString("nombre"),rs.getDate("fechaNacimiento").toLocalDate(),rs.getBoolean("estado")));
+                }
+            }else{
+                System.out.println("Alumno no encontrado");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alumnos;
     }
 }

@@ -41,7 +41,7 @@ public class Conexion {
             con = DriverManager.getConnection(url + "?useLegacyDatetimeCode=false&serverTimezone=UTC" + "&user=" + usuario + "&password=" + password);
             
         }catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         }
         
         return con;
