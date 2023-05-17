@@ -73,12 +73,12 @@ public class MateriaData {
         }
         return mate;
     }
-    public void bajaMateria(int id,boolean estado){
+    public void bajaMateria(int id){
         String sql="UPDATE materia SET estado=? WHERE idMateria=?";
         try{
             PreparedStatement ps;
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setBoolean(1, estado);
+            ps.setBoolean(1, false);
             ps.setInt(2, id);
             if(ps.executeUpdate()==1){
                 System.out.println("modificado");
