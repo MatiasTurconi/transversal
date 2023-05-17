@@ -18,9 +18,8 @@ public class Main {
         //alumD.guardarAlumno(alum);///CARGAR ALUMNO
         //alumD.actualizarAlumno(alum);///MODIFICAR ALUMNO
         //System.out.println(alumD.buscarAlumno(6));///BUSCAR ALUMNO CON ID
-        //alumD.bajaAlumno(1,false);
-        alumD.altaAlumno(1, true);
-        for (Map.Entry<Integer, Alumno> en : alumD.alumnosAlta(true).entrySet()) {
+        //alumD.bajaAlumno(1);
+        for (Map.Entry<Integer, Alumno> en : alumD.alumnosAlta().entrySet()) {
             Alumno alum = en.getValue();
             System.out.println(alum);
         }

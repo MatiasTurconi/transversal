@@ -85,49 +85,37 @@ public class AlumnoData {
         return alum;
     }
     
-    public void bajaAlumno(int id,boolean baja){
+    public void bajaAlumno(int id){
         String sql="UPDATE alumno SET estado=? WHERE idAlumno=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setBoolean(1, baja);
+            ps.setBoolean(1, false);
             ps.setInt(2, id);
-            ps.executeUpdate();
+            if(ps.executeUpdate()==1){
+                System.out.println("Alumno dado de baja");
+            }else{
+                System.out.println("Alumno no encontrado");
+            }
             ps.close();
         } catch (SQLException e) {
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
         }
     }
     
-    public void altaAlumno(int id,boolean alta){
-        String sql="UPDATE alumno SET estado=? WHERE idAlumno=?";
-        try {
-            PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setBoolean(1, alta);
-            ps.setInt(2, id);
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException e) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
-        }
-    }
-    
-    public Map<Integer, Alumno> alumnosAlta(boolean estado){
+    public Map<Integer, Alumno> alumnosAlta(){
         Map<Integer,Alumno> alumnos=null;
         String sql="SELECT * FROM alumno WHERE estado=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setBoolean(1, estado);
+            ps.setBoolean(1, true);
             ResultSet rs=ps.executeQuery();
-            if(rs.next()){
-                alumnos=new HashMap();
-                while(rs.next()){
+            alumnos=new HashMap();
+            while(rs.next()){
                     alumnos.put(rs.getInt("idAlumno"), new Alumno(rs.getInt("idAlumno"),rs.getInt("dni"),rs.getString("apellido"),rs.getString("nombre"),rs.getDate("fechaNacimiento").toLocalDate(),rs.getBoolean("estado")));
-                }
-            }else{
-                System.out.println("No se encontraron alumnos dados de alta");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("No se encontro ningun alumno de alta");
+            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         }
         return alumnos;
     }
