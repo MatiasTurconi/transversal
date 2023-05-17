@@ -39,7 +39,7 @@ public class AlumnoData {
             }else{
                 System.out.println("No se cargo el alumno");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
         }
     }
@@ -56,7 +56,7 @@ public class AlumnoData {
             ps.setInt(6, alumno.getIdAlumno());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
         }
     }
@@ -93,7 +93,7 @@ public class AlumnoData {
             ps.setInt(2, id);
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
         }
     }
@@ -106,7 +106,7 @@ public class AlumnoData {
             ps.setInt(2, id);
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
         }
     }
