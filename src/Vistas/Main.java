@@ -1,6 +1,7 @@
 package Vistas;
 
 import Control.AlumnoData;
+import Control.MateriaData;
 import Modelo.Alumno;
 import java.time.LocalDate;
 
@@ -17,5 +18,7 @@ public class Main {
         //alumD.guardarAlumno(alum);///CARGAR ALUMNO
         //alumD.actualizarAlumno(alum);///MODIFICAR ALUMNO
         System.out.println(alumD.buscarAlumno(4));///BUSCAR ALUMNO CON ID
+        //MateriaData mat = new MateriaData();
+        //mat.bajaMateria(2, false);
     }
 }
