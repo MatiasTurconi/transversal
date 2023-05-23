@@ -1,4 +1,4 @@
-package Control;
+package accesoADatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class Conexion {
-    private static String url="jdbc:mariadb://localhost/universidad";
+    private static String url="jdbc:mariadb://localhost/universidadgp4";
     private static String usuario="root";
     private static String password="";
 

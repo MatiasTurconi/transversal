@@ -1,6 +1,6 @@
-package Control;
+package accesoADatos;
 
-import Modelo.Alumno;
+import entidades.Alumno;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +44,7 @@ public class AlumnoData {
         }
     }
     
-    public void actualizarAlumno(Alumno alumno){
+    public void modificarAlumno(Alumno alumno){
         String sql="UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaNacimiento=?,estado=? WHERE idAlumno=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -102,7 +102,24 @@ public class AlumnoData {
         }
     }
     
-    public Map<Integer, Alumno> alumnosAlta(){
+    public void altaAlumno(int id){
+        String sql="UPDATE alumno SET estado=? WHERE idAlumno=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setBoolean(1, true);
+            ps.setInt(2, id);
+            if(ps.executeUpdate()==1){
+                System.out.println("Alumno dado de alta");
+            }else{
+                System.out.println("Alumno no encontrado");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
+        }
+    }
+    
+    public Map<Integer, Alumno> alumnosInscriptos(){
         Map<Integer,Alumno> alumnos=null;
         String sql="SELECT * FROM alumno WHERE estado=?";
         try {

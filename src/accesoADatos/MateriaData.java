@@ -1,6 +1,6 @@
-package Control;
+package accesoADatos;
 
-import Modelo.Materia;
+import entidades.Materia;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
