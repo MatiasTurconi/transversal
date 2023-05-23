@@ -85,7 +85,31 @@ public class AlumnoData {
         return alum;
     }
     
-    public void bajaAlumno(int id){
+    public Alumno buscarAlumnoPorDNI(int dni){
+        Alumno alum=null;
+        String sql="SELECT * FROM alumno WHERE dni=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                alum=new Alumno();
+                alum.setIdAlumno(rs.getInt("idAlumno"));
+                alum.setDni(rs.getInt("dni"));
+                alum.setApellido(rs.getString("apellido"));
+                alum.setNombre(rs.getString("nombre"));
+                alum.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                alum.setEstado(rs.getBoolean("estado"));
+            }else{
+                System.out.println("Alumno no encontrado");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alum;
+    }
+    
+    public void eliminarAlumno(int id){
         String sql="UPDATE alumno SET estado=? WHERE idAlumno=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -93,23 +117,6 @@ public class AlumnoData {
             ps.setInt(2, id);
             if(ps.executeUpdate()==1){
                 System.out.println("Alumno dado de baja");
-            }else{
-                System.out.println("Alumno no encontrado");
-            }
-            ps.close();
-        } catch (SQLException e) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
-        }
-    }
-    
-    public void altaAlumno(int id){
-        String sql="UPDATE alumno SET estado=? WHERE idAlumno=?";
-        try {
-            PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setBoolean(1, true);
-            ps.setInt(2, id);
-            if(ps.executeUpdate()==1){
-                System.out.println("Alumno dado de alta");
             }else{
                 System.out.println("Alumno no encontrado");
             }
