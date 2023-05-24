@@ -9,8 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,24 +24,24 @@ public class AlumnoData {
     }
     
     public void guardarAlumno(Alumno alumno) {
-        String sql="INSERT INTO alumno(dni,apellido,nombre,fechaNacimiento,estado) VALUES (?,?,?,?,?)";
-        try {
-            PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, alumno.getDni());
-            ps.setString(2, alumno.getApellido());
-            ps.setString(3, alumno.getNombre());
-            ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
-            ps.setBoolean(5, alumno.isEstado());
-            ps.executeUpdate();
-            ResultSet rs=ps.getGeneratedKeys();
-            if(rs.next()){
-                alumno.setIdAlumno(rs.getInt(1));
-            }else{
-                System.out.println("No se cargo el alumno");
+        if(this.buscarAlumnoPorDNI(alumno.getDni()) == null){
+            String sql="INSERT INTO alumno(dni,apellido,nombre,fechaNacimiento,estado) VALUES (?,?,?,?,?)";
+            try {
+                PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, alumno.getDni());
+                ps.setString(2, alumno.getApellido());
+                ps.setString(3, alumno.getNombre());
+                ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
+                ps.setBoolean(5, alumno.isEstado());
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
             }
-        } catch (SQLException e) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
+            System.out.println("Alumno cargado");
+        }else{
+            System.out.println("No se cargo el alumno");
         }
+
     }
     
     public void modificarAlumno(Alumno alumno){
@@ -56,6 +56,7 @@ public class AlumnoData {
             ps.setInt(6, alumno.getIdAlumno());
             ps.executeUpdate();
             ps.close();
+            System.out.println("Alumno modificado");
         } catch (SQLException e) {
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE,null,e);
         }
@@ -116,7 +117,7 @@ public class AlumnoData {
             ps.setBoolean(1, false);
             ps.setInt(2, id);
             if(ps.executeUpdate()==1){
-                System.out.println("Alumno dado de baja");
+                System.out.println("Alumno eliminado");
             }else{
                 System.out.println("Alumno no encontrado");
             }
@@ -126,20 +127,21 @@ public class AlumnoData {
         }
     }
     
-    public Map<Integer, Alumno> alumnosInscriptos(){
-        Map<Integer,Alumno> alumnos=null;
+    public List<Alumno> alumnosInscriptos(){
+        List<Alumno> alumnos=new ArrayList<>();
         String sql="SELECT * FROM alumno WHERE estado=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setBoolean(1, true);
             ResultSet rs=ps.executeQuery();
-            alumnos=new HashMap();
             while(rs.next()){
-                    alumnos.put(rs.getInt("idAlumno"), new Alumno(rs.getInt("idAlumno"),rs.getInt("dni"),rs.getString("apellido"),rs.getString("nombre"),rs.getDate("fechaNacimiento").toLocalDate(),rs.getBoolean("estado")));
+                alumnos.add(new Alumno(rs.getInt("idAlumno"),rs.getInt("dni"),rs.getString("apellido"),rs.getString("nombre"),rs.getDate("fechaNacimiento").toLocalDate(),rs.getBoolean("estado")));
             }
         } catch (SQLException ex) {
-            System.out.println("No se encontro ningun alumno de alta");
             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        }
+        if (alumnos.size()==0) {
+            System.out.println("No hay alumnos inscriptos");
         }
         return alumnos;
     }

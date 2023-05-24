@@ -1,5 +1,6 @@
 package accesoADatos;
 
+import entidades.Inscripcion;
 import entidades.Materia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,13 +21,13 @@ public class InscripcionData {
         con = Conexion.getConexion();
     }
 
-    public void guardarinscripcion(int nota,int idAlu,int idMat){
+    public void guardarInscripcion(Inscripcion inscrip){
         String sql="INSERT INTO inscripcion(nota,idAlumno,idMateria) VALUES (?,?,?)";
         try {
             PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, nota);
-            ps.setInt(2, idAlu);
-            ps.setInt(3, idMat);
+            ps.setInt(1, inscrip.getNota());
+            ps.setInt(2, inscrip.getAlumno().getIdAlumno());
+            ps.setInt(3, inscrip.getMateria().getIdMateria());
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
