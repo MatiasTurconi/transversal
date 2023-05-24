@@ -65,6 +65,7 @@ public class MateriaData {
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                 mate=new Materia();
+                mate.setIdMateria(rs.getInt("idMateria"));
                 mate.setNombre(rs.getString("nombre"));
                 mate.setAño(rs.getInt("año"));
                 mate.setEstado(rs.getBoolean("estado"));
