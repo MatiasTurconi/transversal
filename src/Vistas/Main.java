@@ -29,20 +29,34 @@ public class Main {
 
         
         Materia mat=new Materia("Matematica 2",3,true);
-        matD.guardarMateria(mat);
+//        matD.guardarMateria(mat);
 //        System.out.println(matD.buscarMateria(2));
-//        matD.eliminarMateria(2);
+//        matD.eliminarMateria(6);
 //        for(Materia materia:matD.listarMaterias()){
 //            System.out.println(materia);
 //        }
         
         InscripcionData insD=new InscripcionData();///CONEXION InscripcionData
-        Inscripcion inscrip=new Inscripcion(0,alumD.buscarAlumno(1),matD.buscarMateria(1));///PARA CARGAR INSCRIPCION
+//        Inscripcion inscrip=new Inscripcion(0,alumD.buscarAlumno(1),matD.buscarMateria(1));///PARA CARGAR INSCRIPCION
 //        insD.guardarInscripcion(inscrip);///CARGAR INSCRIPCION
 //        insD.borrarInscripcionMateriaAlumno(1, 1);///BORRAR INSCRIPCION
 //        insD.actualizarNota(1, 4, 0);///ACTUALIZAR NOTA
-//        for (Inscripcion inscrip : insD.obtenerInscripciones()) {
-//            System.out.println(inscrip);
+//        for (Inscripcion inscrip1 : insD.obtenerInscripciones()) {
+//            System.out.println(inscrip1);
 //        }
+        for (Materia mat1 : insD.obtenerMateriasCursadas(3)) {
+            System.out.println(mat1);
+        }
+//        for (Inscripcion inscrip2 : insD.obtenerInscripcionesPorAlumno(3)) {
+//            System.out.println(inscrip2);
+//        }
+        System.out.println("-----------------------------------------------");
+        for (Materia mat2 : insD.obtenerMateriasNoCursadas(3)) {
+            System.out.println(mat2);
+        }
+        System.out.println("-----------------------------------------------");
+        for(Alumno alum2 : insD.obtenerAlumnosPorMateria(2)){
+            System.out.println(alum2);
+        }
     }
 }
