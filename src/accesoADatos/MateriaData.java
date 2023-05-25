@@ -42,7 +42,7 @@ public class MateriaData {
     }
     
     public void modificarMateria(Materia materia){
-        String sql="UPDATE alumno SET nombre=?,año=?,estado=? WHERE idMateria=?";
+        String sql="UPDATE materia SET nombre=?,año=?,estado=? WHERE idMateria=?";
         try {
             try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, materia.getNombre());

@@ -1,5 +1,7 @@
 package accesoADatos;
 
+import static Vistas.Main.alumD;
+import static Vistas.Main.matD;
 import entidades.Alumno;
 import entidades.Inscripcion;
 import entidades.Materia;
@@ -71,8 +73,8 @@ public class InscripcionData {
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                Alumno alum=new AlumnoData().buscarAlumno(rs.getInt("idAlumno"));
-                Materia mat=new MateriaData().buscarMateria(rs.getInt("idMateria"));
+                Alumno alum=alumD.buscarAlumno(rs.getInt("idAlumno"));
+                Materia mat=matD.buscarMateria(rs.getInt("idMateria"));
                 inscrip.add(new Inscripcion(rs.getInt("idInscripto"),rs.getInt("nota"),alum,mat));
             }
         } catch (SQLException ex) {
@@ -103,4 +105,11 @@ public class InscripcionData {
             System.out.println("Inscripcion no encontrada");
         }
     }
+    
+    public List<Inscripcion> obtenerInscripcionesPorAlumno(int id){
+        List<Inscripcion> inscrip=new ArrayList<>();
+        
+        return inscrip;
+    }
+    
 }
