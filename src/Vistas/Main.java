@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args){
         Alumno alum=new Alumno(37648595,"Manuel","Rodriguez",LocalDate.of(1995, 05, 20),true);///ALUMNO SIN ID PARA CARGAR
 //        Alumno alum=new Alumno(4,37648595,"Manuel","Rodriguez",LocalDate.of(1995, 05, 20),false);///ALUMNO CON ID PARA MODIFICAR
-        alumD.guardarAlumno(alum);///CARGAR ALUMNO
+//        alumD.guardarAlumno(alum);///CARGAR ALUMNO
 //        alumD.modificarAlumno(alum);///MODIFICAR ALUMNO
 //        System.out.println(alumD.buscarAlumno(4));///BUSCAR ALUMNO CON ID
 //        System.out.println(alumD.buscarAlumnoPorDNI(37465234));///BUSCAR ALUMNO CON DNI
@@ -44,19 +44,19 @@ public class Main {
 //        for (Inscripcion inscrip1 : insD.obtenerInscripciones()) {
 //            System.out.println(inscrip1);
 //        }
-        for (Materia mat1 : insD.obtenerMateriasCursadas(3)) {
-            System.out.println(mat1);
-        }
-//        for (Inscripcion inscrip2 : insD.obtenerInscripcionesPorAlumno(3)) {
-//            System.out.println(inscrip2);
+//        for (Materia mat1 : insD.obtenerMateriasCursadas(3)) {
+//            System.out.println(mat1);
 //        }
-        System.out.println("-----------------------------------------------");
-        for (Materia mat2 : insD.obtenerMateriasNoCursadas(3)) {
-            System.out.println(mat2);
-        }
-        System.out.println("-----------------------------------------------");
-        for(Alumno alum2 : insD.obtenerAlumnosPorMateria(2)){
-            System.out.println(alum2);
-        }
+////        for (Inscripcion inscrip2 : insD.obtenerInscripcionesPorAlumno(3)) {
+////            System.out.println(inscrip2);
+////        }
+//        System.out.println("-----------------------------------------------");
+//        for (Materia mat2 : insD.obtenerMateriasNoCursadas(3)) {
+//            System.out.println(mat2);
+//        }
+//        System.out.println("-----------------------------------------------");
+//        for(Alumno alum2 : insD.obtenerAlumnosPorMateria(2)){
+//            System.out.println(alum2);
+//        }
     }
 }
