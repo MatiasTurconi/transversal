@@ -37,7 +37,7 @@ public class Main {
 //        }
         
         InscripcionData insD=new InscripcionData();///CONEXION InscripcionData
-//        Inscripcion inscrip=new Inscripcion(0,alumD.buscarAlumno(1),matD.buscarMateria(1));///PARA CARGAR INSCRIPCION
+        Inscripcion inscrip=new Inscripcion(0,alumD.buscarAlumno(1),matD.buscarMateria(1));///PARA CARGAR INSCRIPCION
 //        insD.guardarInscripcion(inscrip);///CARGAR INSCRIPCION
 //        insD.borrarInscripcionMateriaAlumno(1, 1);///BORRAR INSCRIPCION
 //        insD.actualizarNota(1, 4, 0);///ACTUALIZAR NOTA
