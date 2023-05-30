@@ -16,9 +16,9 @@ import javax.swing.table.DefaultTableModel;
  * @author 54265
  */
 public class viewFormulariodeInscripcion extends javax.swing.JInternalFrame {
- private InscripcionData inscData=new InscripcionData ():    
- private AlumnoData aData=new AlumnoData():
- private DeFaultTableModel modelo=new DefaultTableModel();
+ private InscripcionData inscData=new InscripcionData ();
+ private AlumnoData aData=new AlumnoData();
+ private DefaultTableModel modelo=new DefaultTableModel();
     /**
      * Creates new form viewCargarAlumnos
      */
@@ -179,8 +179,7 @@ throw new UnsupportedOperationException("Not supported yet.");
 }
 
     private void armarCabecera() {
-        throw new UnsupportedOperationException("Not supported yet.");//To change body of generated methods, choose Tools | Templates.
-    ArrayList<Object> titulos=new ArrayList<>();
+        ArrayList<Object> titulos=new ArrayList<>();
 titulos.add("ID");
 titulos.add("Nombre");
 titulos.add("Año");
