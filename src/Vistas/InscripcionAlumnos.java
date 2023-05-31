@@ -4,12 +4,28 @@
  */
 package Vistas;
 
+import accesoADatos.AlumnoData;
+import accesoADatos.InscripcionData;
+import accesoADatos.MateriaData;
+import entidades.Alumno;
+import entidades.Inscripcion;
+import entidades.Materia;
+import java.util.List;
+
 /**
  *
  * @author 54265
  */
 public class InscripcionAlumnos extends javax.swing.JFrame {
-
+    public static InscripcionData inscripD=new InscripcionData();
+    public static AlumnoData alumD=new AlumnoData();
+    public static MateriaData matD=new MateriaData();
+    public static Alumno alum=null;
+    public static Materia mat=null;
+    public static Inscripcion inscrip=null;
+    public static List<Alumno> alumnos=null;
+    public static List<Materia> materias=null;
+    public static List<Inscripcion> inscripciones=null;
     /**
      * Creates new form InscripcionAlumnos
      */
@@ -36,6 +52,7 @@ public class InscripcionAlumnos extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMInscripciones = new javax.swing.JMenu();
+        jMIMaterias = new javax.swing.JMenuItem();
         jMCargadeNotas = new javax.swing.JMenu();
         jMConsultas = new javax.swing.JMenu();
 
@@ -82,6 +99,15 @@ public class InscripcionAlumnos extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMInscripciones.setText("Inscripciones");
+
+        jMIMaterias.setText("Materias");
+        jMIMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIMateriasActionPerformed(evt);
+            }
+        });
+        jMInscripciones.add(jMIMaterias);
+
         jMenuBar1.add(jMInscripciones);
 
         jMCargadeNotas.setText("Carga de Notas");
@@ -114,6 +140,14 @@ public class InscripcionAlumnos extends javax.swing.JFrame {
         cM.setVisible(true);
         jEscritorio.add(cM);
     }//GEN-LAST:event_jMenuMateriasActionPerformed
+
+    private void jMIMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIMateriasActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        viewFormulariodeInscripcion vFI=new viewFormulariodeInscripcion();
+        vFI.setVisible(true);
+        jEscritorio.add(vFI);
+    }//GEN-LAST:event_jMIMateriasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,6 +190,7 @@ public class InscripcionAlumnos extends javax.swing.JFrame {
     private javax.swing.JMenu jMArchivo;
     private javax.swing.JMenu jMCargadeNotas;
     private javax.swing.JMenu jMConsultas;
+    private javax.swing.JMenuItem jMIMaterias;
     private javax.swing.JMenu jMInscripciones;
     private javax.swing.JMenu jMMaterias;
     private javax.swing.JMenu jMenu3;
