@@ -64,7 +64,7 @@ public class AlumnoData {
     
     public Alumno buscarAlumno(int id){
         Alumno alum=null;
-        String sql="SELECT * FROM alumno WHERE idAlumno=?";
+        String sql="SELECT * FROM alumno WHERE idAlumno=? AND estado=true";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -88,7 +88,7 @@ public class AlumnoData {
     
     public Alumno buscarAlumnoPorDNI(int dni){
         Alumno alum=null;
-        String sql="SELECT * FROM alumno WHERE dni=?";
+        String sql="SELECT * FROM alumno WHERE dni=? AND estado=true";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, dni);

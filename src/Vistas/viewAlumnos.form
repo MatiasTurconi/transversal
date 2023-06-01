@@ -70,7 +70,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLFechaNac" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLLegajo" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="jLEstado" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="jLEstado" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jDCFechaNac" min="-2" pref="98" max="-2" attributes="0"/>

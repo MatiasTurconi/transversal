@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+import java.util.Date;
+
 /**
  *
  * @author 54265
@@ -16,6 +18,7 @@ public class viewAlumnos extends javax.swing.JInternalFrame {
      */
     public viewAlumnos() {
         initComponents();
+        jDCFechaNac.setMaxSelectableDate(new Date());
     }
 
     /**
@@ -127,7 +130,7 @@ public class viewAlumnos extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLFechaNac)
                                     .addComponent(jLLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLEstado))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jDCFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1)))

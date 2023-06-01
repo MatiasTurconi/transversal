@@ -45,12 +45,11 @@ public class InscripcionAlumnos extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jEscritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMArchivo = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMMaterias = new javax.swing.JMenu();
         jMenuMaterias = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMAlumno = new javax.swing.JMenu();
+        jMIBuscar = new javax.swing.JMenuItem();
+        jMILista = new javax.swing.JMenuItem();
         jMInscripciones = new javax.swing.JMenu();
         jMIMaterias = new javax.swing.JMenuItem();
         jMCargadeNotas = new javax.swing.JMenu();
@@ -72,13 +71,6 @@ public class InscripcionAlumnos extends javax.swing.JFrame {
             .add(0, 279, Short.MAX_VALUE)
         );
 
-        jMArchivo.setText("Archivo");
-
-        jMenuItem1.setText("Salir");
-        jMArchivo.add(jMenuItem1);
-
-        jMenuBar1.add(jMArchivo);
-
         jMMaterias.setText("Materias");
 
         jMenuMaterias.setText("Formulario de Materias");
@@ -91,12 +83,25 @@ public class InscripcionAlumnos extends javax.swing.JFrame {
 
         jMenuBar1.add(jMMaterias);
 
-        jMenu3.setText("Alumno");
+        jMAlumno.setText("Alumno");
 
-        jMenuItem3.setText("Formulario de Alumnos");
-        jMenu3.add(jMenuItem3);
+        jMIBuscar.setText("Buscar");
+        jMIBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIBuscarActionPerformed(evt);
+            }
+        });
+        jMAlumno.add(jMIBuscar);
 
-        jMenuBar1.add(jMenu3);
+        jMILista.setText("Lista");
+        jMILista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIListaActionPerformed(evt);
+            }
+        });
+        jMAlumno.add(jMILista);
+
+        jMenuBar1.add(jMAlumno);
 
         jMInscripciones.setText("Inscripciones");
 
@@ -149,6 +154,22 @@ public class InscripcionAlumnos extends javax.swing.JFrame {
         jEscritorio.add(vFI);
     }//GEN-LAST:event_jMIMateriasActionPerformed
 
+    private void jMIListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIListaActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        AlumnosInscriptos vAI=new AlumnosInscriptos();
+        vAI.setVisible(true);
+        jEscritorio.add(vAI);
+    }//GEN-LAST:event_jMIListaActionPerformed
+
+    private void jMIBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBuscarActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        BuscarAlumno vBA=new BuscarAlumno();
+        vBA.setVisible(true);
+        jEscritorio.add(vBA);
+    }//GEN-LAST:event_jMIBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,16 +208,15 @@ public class InscripcionAlumnos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDesktopPane jEscritorio;
-    private javax.swing.JMenu jMArchivo;
+    private javax.swing.JMenu jMAlumno;
     private javax.swing.JMenu jMCargadeNotas;
     private javax.swing.JMenu jMConsultas;
+    private javax.swing.JMenuItem jMIBuscar;
+    private javax.swing.JMenuItem jMILista;
     private javax.swing.JMenuItem jMIMaterias;
     private javax.swing.JMenu jMInscripciones;
     private javax.swing.JMenu jMMaterias;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuMaterias;
     // End of variables declaration//GEN-END:variables
 }
