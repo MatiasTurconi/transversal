@@ -1,17 +1,22 @@
 package Vistas;
 
-import entidades.Alumno;
+import entidades.Inscripcion;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Usuario
  */
-public class AlumnosInscriptos extends javax.swing.JInternalFrame {
-    public AlumnosInscriptos() {
-        super("ALUMNOS INSCRIPTOS");
+public class viewInscripciones extends javax.swing.JInternalFrame {
+    private int idAlumnos[];
+    private int idMaterias[];
+    /**
+     * Creates new form viewInscripciones
+     */
+    public viewInscripciones() {
+        super("INSCRIPCIONES");
         initComponents();
-        cargaAlumnos();
+        cargaInscripciones();
     }
 
     /**
@@ -39,7 +44,7 @@ public class AlumnosInscriptos extends javax.swing.JInternalFrame {
 
             }
         ));
-        jTDatos.setShowGrid(false);
+        jTDatos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTDatos);
 
         jBSalir.setText("Salir");
@@ -62,20 +67,21 @@ public class AlumnosInscriptos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jBBorrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBSalir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalir)
                     .addComponent(jBBorrar))
@@ -86,40 +92,35 @@ public class AlumnosInscriptos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        idAlumnos=null;
+        idMaterias=null;
         this.dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
-        DefaultTableModel model=(DefaultTableModel) jTDatos.getModel();
-        int[] selec=jTDatos.getSelectedRows();
-        Object[] id=new Object[selec.length];
-        for (int i = 0; i < selec.length; i++) {
-            id[i]=(String) model.getValueAt(selec[i], 0);
-        }
-        if(id.length>0){
-            for (int i = 0; i < id.length; i++) {
-                InscripcionAlumnos.alumD.eliminarAlumno(Integer.parseInt((String) id[i]));
-            }
-            cargaAlumnos();
-        }
+        viewUniversidad.inscripD.borrarInscripcionMateriaAlumno(idAlumnos[jTDatos.getSelectedRow()], idMaterias[jTDatos.getSelectedRow()]);
+        cargaInscripciones();
     }//GEN-LAST:event_jBBorrarActionPerformed
 
-    private void cargaAlumnos(){
-        String colum[]={"ID","Apellido","Nombre","DNI","Fecha Nacimiento"};
-        InscripcionAlumnos.alumnos=InscripcionAlumnos.alumD.alumnosInscriptos();
-        String datos[][]=new String[InscripcionAlumnos.alumnos.size()][5];
+    private void cargaInscripciones(){
+        String colum[]={"ALUMNO","MATERIA","NOTA"};
+        viewUniversidad.inscripciones=viewUniversidad.inscripD.obtenerInscripciones();
+        String datos[][]=new String[viewUniversidad.inscripciones.size()][3];
         int i=0;
-        for (Alumno alum : InscripcionAlumnos.alumnos) {
-            datos[i][0]= alum.getIdAlumno()+"";
-            datos[i][1]=alum.getApellido();
-            datos[i][2]=alum.getNombre();
-            datos[i][3]=alum.getDni()+"";
-            datos[i][4]=alum.getFechaNacimiento().getDayOfMonth()+"/"+alum.getFechaNacimiento().getMonth().getValue()+"/"+alum.getFechaNacimiento().getYear();
+        idAlumnos=new int[viewUniversidad.inscripciones.size()];
+        idMaterias=new int[viewUniversidad.inscripciones.size()];
+        for (Inscripcion ins : viewUniversidad.inscripciones) {
+            datos[i][0]= ins.getAlumno().getNombre()+" "+ins.getAlumno().getApellido();
+            idAlumnos[i]=ins.getAlumno().getIdAlumno();
+            datos[i][1]= ins.getMateria().getNombre();
+            idMaterias[i]=ins.getMateria().getIdMateria();
+            datos[i][2]= ins.getNota()+"";
             i++;
-            alum=null;
+            ins=null;
         }
         jTDatos.setModel(new DefaultTableModel(datos,colum));
-        InscripcionAlumnos.alumnos=null;
+        jTDatos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        viewUniversidad.inscripciones=null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

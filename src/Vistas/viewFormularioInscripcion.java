@@ -16,12 +16,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author 54265
  */
-public class viewFormulariodeInscripcion extends javax.swing.JInternalFrame {
+public class viewFormularioInscripcion extends javax.swing.JInternalFrame {
  private DefaultTableModel modelo=new DefaultTableModel();
     /**
      * Creates new form viewCargarAlumnos
      */
-    public viewFormulariodeInscripcion() {
+    public viewFormularioInscripcion() {
         initComponents();
         cargarAlumnos();
         armarCabecera();
@@ -226,14 +226,14 @@ public class viewFormulariodeInscripcion extends javax.swing.JInternalFrame {
     private void jBInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInscribirActionPerformed
         int selec=jTTablasdeMaterias.getSelectedRow();
         if(selec!=-1){
-            InscripcionAlumnos.alum=(Alumno)jCBAlumno.getSelectedItem();
-            InscripcionAlumnos.mat=new Materia();
-            InscripcionAlumnos.mat.setIdMateria((Integer)modelo.getValueAt(selec, 0));
-            InscripcionAlumnos.inscrip=new Inscripcion(0,InscripcionAlumnos.alum,InscripcionAlumnos.mat);
-            InscripcionAlumnos.inscripD.guardarInscripcion(InscripcionAlumnos.inscrip);
-            InscripcionAlumnos.mat=null;
-            InscripcionAlumnos.alum=null;
-            InscripcionAlumnos.inscrip=null;
+            viewUniversidad.alum=(Alumno)jCBAlumno.getSelectedItem();
+            viewUniversidad.mat=new Materia();
+            viewUniversidad.mat.setIdMateria((Integer)modelo.getValueAt(selec, 0));
+            viewUniversidad.inscrip=new Inscripcion(0,viewUniversidad.alum,viewUniversidad.mat);
+            viewUniversidad.inscripD.guardarInscripcion(viewUniversidad.inscrip);
+            viewUniversidad.mat=null;
+            viewUniversidad.alum=null;
+            viewUniversidad.inscrip=null;
             borrarFilas();
             llenarTabla();
         }else{
@@ -244,9 +244,9 @@ public class viewFormulariodeInscripcion extends javax.swing.JInternalFrame {
     private void jBAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnularInscripcionActionPerformed
         int selec=jTTablasdeMaterias.getSelectedRow();
         if(selec!=-1){
-            InscripcionAlumnos.alum=(Alumno)jCBAlumno.getSelectedItem();
-            InscripcionAlumnos.inscripD.borrarInscripcionMateriaAlumno(InscripcionAlumnos.alum.getIdAlumno(), (Integer)modelo.getValueAt(selec, 0));
-            InscripcionAlumnos.alum=null;
+            viewUniversidad.alum=(Alumno)jCBAlumno.getSelectedItem();
+            viewUniversidad.inscripD.borrarInscripcionMateriaAlumno(viewUniversidad.alum.getIdAlumno(), (Integer)modelo.getValueAt(selec, 0));
+            viewUniversidad.alum=null;
             borrarFilas();
             llenarTabla();
         }else{
@@ -272,7 +272,7 @@ public class viewFormulariodeInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
     private void cargarAlumnos() {
-        for (Alumno alum: InscripcionAlumnos.alumD.alumnosInscriptos()) {
+        for (Alumno alum: viewUniversidad.alumD.alumnosInscriptos()) {
             jCBAlumno.addItem(alum);
         }
         if(jCBAlumno.getItemCount()>0){
@@ -299,18 +299,18 @@ public class viewFormulariodeInscripcion extends javax.swing.JInternalFrame {
     }
 
     private void llenarTabla() {
-        InscripcionAlumnos.alum=(Alumno)jCBAlumno.getSelectedItem();
+        viewUniversidad.alum=(Alumno)jCBAlumno.getSelectedItem();
         if(jRBNoInscriptas.isSelected()){
-            for (Materia materia : InscripcionAlumnos.inscripD.obtenerMateriasNoCursadas(InscripcionAlumnos.alum.getIdAlumno())) {
+            for (Materia materia : viewUniversidad.inscripD.obtenerMateriasNoCursadas(viewUniversidad.alum.getIdAlumno())) {
                 modelo.addRow(new Object[]{materia.getIdMateria(),materia.getNombre(),materia.getAño()});
             }
         }else{
-            for (Materia materia : InscripcionAlumnos.inscripD.obtenerMateriasCursadas(InscripcionAlumnos.alum.getIdAlumno())) {
+            for (Materia materia : viewUniversidad.inscripD.obtenerMateriasCursadas(viewUniversidad.alum.getIdAlumno())) {
                 modelo.addRow(new Object[]{materia.getIdMateria(),materia.getNombre(),materia.getAño()});
             }
         }
         jTTablasdeMaterias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        InscripcionAlumnos.alum=null;
+        viewUniversidad.alum=null;
     }
 }
 
